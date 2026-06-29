@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>shejeison</title>
+    <script>
+      // Defensive patch to prevent third-party scripts (like browser extensions or devtools) 
+      // from crashing the app when trying to proxy window.fetch in an environment where it's read-only.
+      (function() {
+        try {
+          const descriptor = Object.getOwnPropertyDescriptor(window, 'fetch');
+          if (descriptor && !descriptor.writable && descriptor.configurable) {
+            const originalFetch = descriptor.get ? descriptor.get.bind(window) : descriptor.value;
+            Object.defineProperty(window, 'fetch', {
+              get() { return originalFetch; },
+              set(newVal) {
+                console.warn('Ignored attempt to overwrite window.fetch by a third-party script.');
+              },
+              configurable: true,
+              enumerable: descriptor.enumerable
+            });
+          }
+        } catch (e) {
+          console.error('Failed to apply fetch defensive patch:', e);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
