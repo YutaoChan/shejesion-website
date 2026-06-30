@@ -385,16 +385,16 @@ const Footer = () => {
             <div>
               <h4 className="font-bold mb-6">Products</h4>
               <ul className="space-y-4 text-black/50 text-sm">
-                <li><Link to="/#hearing-aids" className="hover:text-black transition-colors">Hearing Aids</Link></li>
                 <li><Link to="/#music-earplugs" className="hover:text-black transition-colors">Earplugs</Link></li>
+                <li><Link to="/#hearing-aids" className="hover:text-black transition-colors">Hearing Aids</Link></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-bold mb-6">Support</h4>
               <ul className="space-y-4 text-black/50 text-sm">
-                <li><Link to="/support" className="hover:text-black transition-colors">FAQ</Link></li>
                 <li><Link to="/support#support-contact" className="hover:text-black transition-colors">Contact Us</Link></li>
+                <li><Link to="/support" className="hover:text-black transition-colors">FAQ</Link></li>
               </ul>
             </div>
           </div>
