@@ -376,6 +376,9 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
           <div className="max-w-md space-y-6">
             <h3 className="text-2xl font-bold tracking-tighter">shejeison</h3>
+            <p className="text-sm text-black/50 leading-relaxed">
+              Experience this world better with shejeison.
+            </p>
           </div>
           
           <div className="flex gap-16 md:gap-24">
