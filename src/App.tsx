@@ -138,7 +138,7 @@ const Hero = () => {
               href="#music-earplugs" 
               className="w-full sm:w-auto px-8 py-4 bg-black text-white rounded-full font-medium hover:bg-black/90 transition-all flex items-center justify-center gap-2 group"
             >
-              Explore Earplugs
+              Earplugs
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
             <a 
