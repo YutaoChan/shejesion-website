@@ -586,6 +586,37 @@ const Support = () => {
         </motion.div>
       </section>
 
+      {/* Contact Section */}
+      <section id="support-contact" className="py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-black text-white rounded-[40px] p-12 md:p-16 text-center flex flex-col items-center shadow-2xl"
+          >
+            <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6">
+              <Mail size={32} className="text-white" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Warranty and Support</h2>
+            <p className="text-lg text-white/60 max-w-xl mb-10 leading-relaxed">
+              Need to activate lifetime warranty or resolve any issues with shejeison product?
+              <br />
+              <br />
+              Please contact our after-sales team.
+            </p>
+            <a 
+              href="mailto:shejeison@outlook.com"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold hover:bg-emerald-500 hover:text-white transition-colors duration-300 group"
+            >
+              <Mail size={20} />
+              shejeison@outlook.com
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform ml-1" />
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="py-24 bg-stone-50">
         <div className="max-w-7xl mx-auto px-6">
@@ -687,33 +718,6 @@ const Support = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="support-contact" className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-black text-white rounded-[40px] p-12 md:p-16 text-center flex flex-col items-center shadow-2xl"
-          >
-            <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6">
-              <Mail size={32} className="text-white" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Still need help?</h2>
-            <p className="text-lg text-white/60 max-w-xl mb-10 leading-relaxed">
-              Our support team is always ready to assist you with any questions about our products, your order.
-            </p>
-            <a 
-              href="mailto:shejeison@outlook.com"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold hover:bg-emerald-500 hover:text-white transition-colors duration-300 group"
-            >
-              <Mail size={20} />
-              shejeison@outlook.com
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform ml-1" />
-            </a>
-          </motion.div>
-        </div>
-      </section>
     </main>
   );
 };
