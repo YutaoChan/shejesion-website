@@ -358,7 +358,7 @@ const StorySection = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-8">Our Mission</h2>
           <p className="text-xl text-black/70 leading-relaxed italic serif">
-            "At shejeison, we don't just build devices; we build bridges. We believe that everyone deserves to experience the symphony of life—from the whisper of a loved one to the roar of a stadium—on your own terms, with absolute comfort."
+            "At shejeison, we don’t just build devices—we build bridges to the sounds of life. We believe everyone should be able to experience life’s symphony in their own way, easily and joyfully—from the whispers of a loved one to the cheers and laughter at a live event."
           </p>
           <div className="mt-12 flex justify-center">
             <div className="w-16 h-1 bg-emerald-600 rounded-full" />
