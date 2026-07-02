@@ -363,7 +363,7 @@ const StorySection = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-8">Our Mission</h2>
-          <p className="text-xl text-black/70 leading-relaxed italic serif">
+          <p className="text-lg md:text-xl text-black/70 leading-relaxed font-medium">
             "At shejeison, we don’t just build devices—we build bridges to the sounds of life. We believe everyone should be able to experience life’s symphony in their own way, easily and joyfully—from the whispers of a loved one to the cheers and laughter at a live event."
           </p>
           <div className="mt-12 flex justify-center">
