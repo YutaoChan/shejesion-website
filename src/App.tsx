@@ -49,7 +49,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Earplugs', href: '/#music-earplugs' },
-    { name: 'Hearing Aids', href: '/#hearing-aids' },
+    { name: 'Hearing Aids', href: '/hearing-aids' },
     { name: 'Support', href: '/support' },
     { name: 'Our Story', href: '/#story' },
   ];
@@ -141,12 +141,12 @@ const Hero = () => {
               Earplugs
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <a 
-              href="#hearing-aids" 
+            <Link 
+              to="/hearing-aids" 
               className="w-full sm:w-auto px-8 py-4 bg-white border border-black/10 text-black rounded-full font-medium hover:bg-black/5 transition-all"
             >
               Hearing Aids
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>
@@ -154,7 +154,7 @@ const Hero = () => {
   );
 };
 
-const ProductSection = ({ id, title, subtitle = null, description = null, tagline = null, features, image, reverse = false, accentColor = "emerald", supportLink = "", supportText = "", techLink = "" }) => {
+const ProductSection = ({ id, title, subtitle = null, description = null, tagline = null, features, image, reverse = false, accentColor = "emerald", supportLink = "", supportText = "", techLink = "", qaLink = "" }) => {
   const colorMap = {
     emerald: "text-emerald-600 bg-emerald-50",
     blue: "text-blue-600 bg-blue-50",
@@ -248,6 +248,12 @@ const ProductSection = ({ id, title, subtitle = null, description = null, taglin
               {supportLink && (
                 <Link to={supportLink} className="order-1 md:order-2 px-6 py-3 md:px-8 md:py-4 border-2 border-black text-black rounded-full font-bold hover:bg-black hover:text-white transition-all flex items-center gap-2">
                   {supportText || "Customer Support"}
+                  <ArrowRight size={18} />
+                </Link>
+              )}
+              {qaLink && (
+                <Link to={qaLink} className="order-3 px-6 py-3 md:px-8 md:py-4 border-2 border-black text-black rounded-full font-bold hover:bg-black hover:text-white transition-all flex items-center gap-2">
+                  Q&A
                   <ArrowRight size={18} />
                 </Link>
               )}
@@ -369,6 +375,157 @@ const StorySection = () => {
   );
 };
 
+const earplugFaqs = [
+  {
+    question: "How to wear earplugs correctly for the best experience?",
+    answer: (
+      <div className="space-y-4">
+        <p>Follow these simple steps to achieve maximum noise reduction, optimal sound quality, and all-day comfort:</p>
+        <ul className="list-decimal pl-5 space-y-2">
+          <li><strong>Find Your Fit:</strong> Select the ear tip size that best seals your ear canal. We recommend starting with the Medium size. If it feels loose, try Large; if it causes pressure, try Small or Extra Small.</li>
+          <li><strong>Check L/R Markings:</strong> Ensure you have the correct earplug for each ear. Look for the subtle L (Left) and R (Right) indicators on the inner side of the earplug body.</li>
+          <li><strong>Insert & Rotate:</strong> Gently insert the earplug into your ear canal. Once inserted, rotate it slightly backwards to lock the acoustic seal into the most comfortable and effective position.</li>
+        </ul>
+        <Link to="/earplugs-support" className="inline-block text-sm font-bold text-black underline hover:text-black/70 transition-colors">
+          Check guide video
+        </Link>
+      </div>
+    )
+  },
+  {
+    question: "How to switch noise cancellation modes?",
+    answer: (
+      <div className="space-y-4">
+        <p>Change mode by rotating the notch until it clicks:</p>
+        <ul className="list-disc pl-5 space-y-2">
+          <li>
+            <strong>Transparent Mode:</strong> rotating the notch to{" "}
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block align-text-bottom mx-1">
+              <circle cx="10" cy="10" r="8" stroke="black" strokeWidth="2" />
+            </svg>
+          </li>
+          <li>
+            <strong>Experience Mode:</strong> rotating the notch to{" "}
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block align-text-bottom mx-1">
+              <path d="M10 2 A 8 8 0 0 1 10 18 Z" fill="black" />
+              <circle cx="10" cy="10" r="8" stroke="black" strokeWidth="2" />
+            </svg>
+          </li>
+          <li>
+            <strong>Quiet Mode:</strong> rotating the notch to{" "}
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block align-text-bottom mx-1">
+              <circle cx="10" cy="10" r="8" fill="black" />
+            </svg>
+          </li>
+        </ul>
+        <p className="text-sm text-black/60 italic">Tip: You can choose the right mode before wearing the earplugs after familiar with each mode.</p>
+      </div>
+    )
+  },
+  {
+    question: "How do I clean my earplugs?",
+    answer: "Wipe the exterior of the earplugs with a soft, dry cloth. The silicone ear tips can be removed and washed with mild soap and warm water. Ensure the tips are completely dry before reattaching them to the earplugs."
+  },
+  {
+    question: "Is there a warranty?",
+    answer: "Yes, all shejeison products come with a life-time support that covers any manufacturing defects. If you experience any issues, please contact our support team."
+  },
+  {
+    question: "What is NRR (Noise Reduction Rating)?",
+    answer: "NRR (Noise Reduction Rating) is a standard measurement used to determine the effectiveness of hearing protection devices. The higher the NRR number, the greater the potential for noise reduction. For example, an NRR of 27 means the earplugs can reduce noise levels by up to 27 decibels when worn correctly."
+  }
+];
+
+const FaqList = ({ faqs, openIndex, setOpenIndex }) => (
+  <div className="space-y-4">
+    {faqs.map((faq, index) => {
+      const isOpen = openIndex === index;
+      return (
+        <motion.div 
+          key={index}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.1 }}
+          className="bg-white border border-black/5 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+        >
+          <button
+            onClick={() => setOpenIndex(isOpen ? null : index)}
+            className="w-full flex items-center justify-between p-6 text-left hover:bg-stone-50 transition-colors duration-200"
+          >
+            <span className="font-semibold text-lg pr-8">{faq.question}</span>
+            <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300 ${isOpen ? 'bg-black text-white' : 'bg-black/5 text-black'}`}>
+              {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+            </div>
+          </button>
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <div className="p-6 pt-0 text-black/60 leading-relaxed border-t border-black/5 bg-stone-50/50">
+                  {faq.answer}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      );
+    })}
+  </div>
+);
+
+const hearingAidFaqs = [
+  {
+    question: "Why do I hear a whistling sound?",
+    answer: "This is usually caused by a loose fit. Please ensure you are using the correct size earplug and that the hearing aid is inserted securely into your ear canal. A proper seal will eliminate whistling."
+  },
+  {
+    question: "What should I do if there is no sound or the sound is fuzzy?",
+    answer: (
+      <div className="space-y-2">
+        <p>1. Ensure the device is charged. Place it correctly in the charging case.</p>
+        <p>2. Check if the sound receiver or microphone is blocked and clean them if necessary.</p>
+        <p>3. Increase the volume level.</p>
+        <p>4. Try different modes to find the one best suited for your environment.</p>
+        <p>5. Adjust the earplug position or try a different size for a better fit.</p>
+      </div>
+    )
+  },
+  {
+    question: "What if the earplugs are too big or too small?",
+    answer: "Your package includes 4 different sizes of earplugs. We recommend trying each size to find the most comfortable and secure fit for your ear canal."
+  },
+  {
+    question: "Why won't the hearing aids charge in the case?",
+    answer: (
+      <div className="space-y-2">
+        <p>1. Ensure the hearing aids are making proper contact with the charging pins in the case.</p>
+        <p>2. Clean the charging pins on the hearing aids and the charging slots in the case, then re-insert the devices.</p>
+        <p>3. Ensure the charging case itself has power; plug in the charging cable if necessary.</p>
+      </div>
+    )
+  },
+  {
+    question: "Will the hearing aids fall out easily?",
+    answer: "Not at all. When worn correctly, they provide a secure and stable fit that stays in place even during movement. They are designed for both stability and all-day comfort."
+  }
+];
+
+const supportFaqs = [
+  {
+    question: "Why can't I contact the after-sales team by clicking the email?",
+    answer: "This may be due to a website malfunction. Please send an email to the after-sales team manually."
+  },
+  {
+    question: "I have suggestions of product upgrade. How can I contact shejeison?",
+    answer: "Thank you for your Supports of shejeison. Please contact the after-sales team to provide your valuable suggestions."
+  }
+];
+
 const Footer = () => {
   return (
     <footer id="contact" className="bg-white border-t border-black/5 pt-24 pb-12">
@@ -386,7 +543,7 @@ const Footer = () => {
               <h4 className="font-bold mb-6">Products</h4>
               <ul className="space-y-4 text-black/50 text-sm">
                 <li><Link to="/#music-earplugs" className="hover:text-black transition-colors">Earplugs</Link></li>
-                <li><Link to="/#hearing-aids" className="hover:text-black transition-colors">Hearing Aids</Link></li>
+                <li><Link to="/hearing-aids" className="hover:text-black transition-colors">Hearing Aids</Link></li>
               </ul>
             </div>
             
@@ -433,6 +590,7 @@ const Home = () => {
         supportLink="/earplugs-support"
         supportText="Watch Usage Video"
         techLink="/earplugs-tech"
+        qaLink="/earplugs-qa"
         features={[
           { name: "Adjustable Noise Reduction", desc: "3-level adjustable noise reduction (18, 22 & 27 dB) adapts to any scene: casual conversation at parties, live music events, or quiet focus while commuting and reading.", icon: <Check size={18} /> },
           { name: "Clear & High Fidelity Sound", desc: "Filters unwanted noise while preserving crystal-clear, high-fidelity music, delivering safe hearing protection for live performances.", icon: <Check size={18} /> },
@@ -441,6 +599,18 @@ const Home = () => {
         ]}
       />
 
+      <StorySection />
+    </main>
+  );
+};
+
+const HearingAids = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <main className="pt-24">
       <ProductSection 
         id="hearing-aids"
         title={<>SHEJEISON <br /> Smart hearing aids</>}
@@ -448,8 +618,8 @@ const Home = () => {
         accentColor="emerald"
         reverse={true}
         image="/hearingaids/hearingaids(grey).jpg"
-        supportLink="/support"
-        supportText="Customer Support"
+        supportLink="/hearing-aids-qa"
+        supportText="Q&A"
         techLink="/hearing-aids-tech"
         features={[
           { name: "Intelligent AI Noise Cancellation", desc: "Automatically detects and suppresses background noise, significantly enhancing speech clarity in all daily environments.", icon: <Check size={18} /> },
@@ -458,15 +628,12 @@ const Home = () => {
           { name: "Four Hearing Modes & Five-Level Volume Control", desc: "Effortlessly switch between dedicated hearing modes and fine-tune 5-level volume to adapt seamlessly to any surrounding.", icon: <Check size={18} /> },
         ]}
       />
-
-      <StorySection />
     </main>
   );
 };
 
 const Support = () => {
-  const [openEarplugIndex, setOpenEarplugIndex] = useState<number | null>(null);
-  const [openHearingAidIndex, setOpenHearingAidIndex] = useState<number | null>(null);
+  const [openSupportIndex, setOpenSupportIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if (!window.location.hash) {
@@ -474,104 +641,6 @@ const Support = () => {
       setTimeout(() => window.scrollTo(0, 0), 50);
     }
   }, []);
-
-  const earplugFaqs = [
-    {
-      question: "How to wear earplugs correctly for the best experience?",
-      answer: (
-        <div className="space-y-4">
-          <p>Follow these simple steps to achieve maximum noise reduction, optimal sound quality, and all-day comfort:</p>
-          <ul className="list-decimal pl-5 space-y-2">
-            <li><strong>Find Your Fit:</strong> Select the ear tip size that best seals your ear canal. We recommend starting with the Medium size. If it feels loose, try Large; if it causes pressure, try Small or Extra Small.</li>
-            <li><strong>Check L/R Markings:</strong> Ensure you have the correct earplug for each ear. Look for the subtle L (Left) and R (Right) indicators on the inner side of the earplug body.</li>
-            <li><strong>Insert & Rotate:</strong> Gently insert the earplug into your ear canal. Once inserted, rotate it slightly backwards to lock the acoustic seal into the most comfortable and effective position.</li>
-          </ul>
-          <Link to="/earplugs-support" className="inline-block text-sm font-bold text-black underline hover:text-black/70 transition-colors">
-            Check guide video
-          </Link>
-        </div>
-      )
-    },
-    {
-      question: "How to switch noise cancellation modes?",
-      answer: (
-        <div className="space-y-4">
-          <p>Change mode by rotating the notch until it clicks:</p>
-          <ul className="list-disc pl-5 space-y-2">
-            <li>
-              <strong>Transparent Mode:</strong> rotating the notch to{" "}
-              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block align-text-bottom mx-1">
-                <circle cx="10" cy="10" r="8" stroke="black" strokeWidth="2" />
-              </svg>
-            </li>
-            <li>
-              <strong>Experience Mode:</strong> rotating the notch to{" "}
-              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block align-text-bottom mx-1">
-                <path d="M10 2 A 8 8 0 0 1 10 18 Z" fill="black" />
-                <circle cx="10" cy="10" r="8" stroke="black" strokeWidth="2" />
-              </svg>
-            </li>
-            <li>
-              <strong>Quiet Mode:</strong> rotating the notch to{" "}
-              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block align-text-bottom mx-1">
-                <circle cx="10" cy="10" r="8" fill="black" />
-              </svg>
-            </li>
-          </ul>
-          <p className="text-sm text-black/60 italic">Tip: You can choose the right mode before wearing the earplugs after familiar with each mode.</p>
-        </div>
-      )
-    },
-    {
-      question: "How do I clean my earplugs?",
-      answer: "Wipe the exterior of the earplugs with a soft, dry cloth. The silicone ear tips can be removed and washed with mild soap and warm water. Ensure the tips are completely dry before reattaching them to the earplugs."
-    },
-    {
-      question: "Is there a warranty?",
-      answer: "Yes, all shejeison products come with a life-time support that covers any manufacturing defects. If you experience any issues, please contact our support team."
-    },
-    {
-      question: "What is NRR (Noise Reduction Rating)?",
-      answer: "NRR (Noise Reduction Rating) is a standard measurement used to determine the effectiveness of hearing protection devices. The higher the NRR number, the greater the potential for noise reduction. For example, an NRR of 27 means the earplugs can reduce noise levels by up to 27 decibels when worn correctly."
-    }
-  ];
-
-  const hearingAidFaqs = [
-    {
-      question: "Why do I hear a whistling sound?",
-      answer: "This is usually caused by a loose fit. Please ensure you are using the correct size earplug and that the hearing aid is inserted securely into your ear canal. A proper seal will eliminate whistling."
-    },
-    {
-      question: "What should I do if there is no sound or the sound is fuzzy?",
-      answer: (
-        <div className="space-y-2">
-          <p>1. Ensure the device is charged. Place it correctly in the charging case.</p>
-          <p>2. Check if the sound receiver or microphone is blocked and clean them if necessary.</p>
-          <p>3. Increase the volume level.</p>
-          <p>4. Try different modes to find the one best suited for your environment.</p>
-          <p>5. Adjust the earplug position or try a different size for a better fit.</p>
-        </div>
-      )
-    },
-    {
-      question: "What if the earplugs are too big or too small?",
-      answer: "Your package includes 4 different sizes of earplugs. We recommend trying each size to find the most comfortable and secure fit for your ear canal."
-    },
-    {
-      question: "Why won't the hearing aids charge in the case?",
-      answer: (
-        <div className="space-y-2">
-          <p>1. Ensure the hearing aids are making proper contact with the charging pins in the case.</p>
-          <p>2. Clean the charging pins on the hearing aids and the charging slots in the case, then re-insert the devices.</p>
-          <p>3. Ensure the charging case itself has power; plug in the charging cable if necessary.</p>
-        </div>
-      )
-    },
-    {
-      question: "Will the hearing aids fall out easily?",
-      answer: "Not at all. When worn correctly, they provide a secure and stable fit that stays in place even during movement. They are designed for both stability and all-day comfort."
-    }
-  ];
 
   return (
     <main className="min-h-screen font-sans">
@@ -626,98 +695,66 @@ const Support = () => {
             </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Earplugs Column */}
-            <div className="bg-white p-8 rounded-3xl border border-black/5 shadow-sm">
-              <h3 className="text-2xl font-bold mb-8 text-center lg:text-left">Earplugs</h3>
-              <div className="space-y-4">
-                {earplugFaqs.map((faq, index) => {
-                  const isOpen = openEarplugIndex === index;
-                  return (
-                    <motion.div 
-                      key={index}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="bg-white border border-black/5 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
-                    >
-                      <button
-                        onClick={() => setOpenEarplugIndex(isOpen ? null : index)}
-                        className="w-full flex items-center justify-between p-6 text-left hover:bg-stone-50 transition-colors duration-200"
-                      >
-                        <span className="font-semibold text-lg pr-8">{faq.question}</span>
-                        <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300 ${isOpen ? 'bg-black text-white' : 'bg-black/5 text-black'}`}>
-                          {isOpen ? <Minus size={16} /> : <Plus size={16} />}
-                        </div>
-                      </button>
-                      <AnimatePresence>
-                        {isOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: "easeInOut" }}
-                          >
-                            <div className="p-6 pt-0 text-black/60 leading-relaxed border-t border-black/5 bg-stone-50/50">
-                              {faq.answer}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Hearing Aids Column */}
-            <div className="bg-white p-8 rounded-3xl border border-black/5 shadow-sm">
-              <h3 className="text-2xl font-bold mb-8 text-center lg:text-left">Hearing Aids</h3>
-              <div className="space-y-4">
-                {hearingAidFaqs.map((faq, index) => {
-                  const isOpen = openHearingAidIndex === index;
-                  return (
-                    <motion.div 
-                      key={index}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="bg-white border border-black/5 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
-                    >
-                      <button
-                        onClick={() => setOpenHearingAidIndex(isOpen ? null : index)}
-                        className="w-full flex items-center justify-between p-6 text-left hover:bg-stone-50 transition-colors duration-200"
-                      >
-                        <span className="font-semibold text-lg pr-8">{faq.question}</span>
-                        <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300 ${isOpen ? 'bg-black text-white' : 'bg-black/5 text-black'}`}>
-                          {isOpen ? <Minus size={16} /> : <Plus size={16} />}
-                        </div>
-                      </button>
-                      <AnimatePresence>
-                        {isOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: "easeInOut" }}
-                          >
-                            <div className="p-6 pt-0 text-black/60 leading-relaxed border-t border-black/5 bg-stone-50/50">
-                              {faq.answer}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </motion.div>
-                  );
-                })}
-              </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white p-6 md:p-8 rounded-3xl border border-black/5 shadow-sm">
+              <FaqList faqs={supportFaqs} openIndex={openSupportIndex} setOpenIndex={setOpenSupportIndex} />
             </div>
           </div>
         </div>
       </section>
 
+    </main>
+  );
+};
+
+const EarplugsQA = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <main className="min-h-screen bg-stone-50 pt-32 pb-24 font-sans">
+      <section className="bg-white pt-16 pb-20 px-6 text-center">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-black tracking-tighter">Frequently Asked Questions</h1>
+        </motion.div>
+      </section>
+
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="bg-white p-6 md:p-8 rounded-3xl border border-black/5 shadow-sm">
+            <FaqList faqs={earplugFaqs} openIndex={openIndex} setOpenIndex={setOpenIndex} />
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+};
+
+const HearingAidsQA = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <main className="min-h-screen bg-stone-50 pt-32 pb-24 font-sans">
+      <section className="bg-white pt-16 pb-20 px-6 text-center">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-black tracking-tighter">Frequently Asked Questions</h1>
+        </motion.div>
+      </section>
+
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="bg-white p-6 md:p-8 rounded-3xl border border-black/5 shadow-sm">
+            <FaqList faqs={hearingAidFaqs} openIndex={openIndex} setOpenIndex={setOpenIndex} />
+          </div>
+        </div>
+      </section>
     </main>
   );
 };
@@ -778,9 +815,12 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/hearing-aids" element={<HearingAids />} />
           <Route path="/support" element={<Support />} />
           <Route path="/earplugs-tech" element={<EarplugsTech />} />
           <Route path="/earplugs-support" element={<EarplugsSupport />} />
+          <Route path="/earplugs-qa" element={<EarplugsQA />} />
+          <Route path="/hearing-aids-qa" element={<HearingAidsQA />} />
           <Route path="/hearing-aids-tech" element={<HearingAidsTech />} />
         </Routes>
         <Footer />
