@@ -174,11 +174,11 @@ const ProductSection = ({ id, title, subtitle = null, description = null, taglin
             transition={{ duration: 0.8 }}
             className="md:flex-[2] w-full"
           >
-            <div className="relative aspect-[4/3] md:aspect-square rounded-3xl overflow-hidden shadow-2xl group">
+            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl group">
               <img 
                 src={image} 
                 alt={altText} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
