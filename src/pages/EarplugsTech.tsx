@@ -77,7 +77,7 @@ const EarplugsTech = () => {
               {/* Add to Cart */}
               <div className="flex mb-8">
                 <a 
-                  href={selectedColor === 'Purple' ? "https://www.amazon.com/SHEJEISON-Adjustable-Ear-Plugs-Comfortable/dp/B0GKPQTKMD/ref=sr_1_6?crid=PV4VWO1VQZ04&dib=eyJ2IjoiMSJ9.FZcSlOAt2_euTIc2VpLdB8P3_5nHnJOIQJj7JeYn_6wvkn-UmLyU-yfv_S5SZGbplxZI0WAAo8iOtuLBg2BjmQB_LMPnJ8yvD0XkAZCyYfjttZW5HII4PTAbHCxSlt9MMTgvLHR6uETvEraZABcTlz9OnGR2cZcuvocsHqP3-a3y27LW15CReT7fVBSThxK9ySno0wdzf7pXntDBerVza4YCi5yJGI1soD3_Xic0AUirweNPWTpVEYn5B1qpjsAxOeXbUTiRPiJNIoiTGWCsjN4r5kiVNdWOTG3dVzREINY.GXgpEWnGg4foibsG85PZp3A7FKRsSYQ7WlYCih9vXx4&dib_tag=se&keywords=ear%2Bplug%2Bconcert&qid=1774931662&sprefix=%2Caps%2C588&sr=8-6&th=1" : "https://www.amazon.com/SHEJEISON-Adjustable-Ear-Plugs-Comfortable/dp/B0GKPDVKGD/ref=sr_1_6?crid=PV4VWO1VQZ04&dib=eyJ2IjoiMSJ9.FZcSlOAt2_euTIc2VpLdB8P3_5nHnJOIQJj7JeYn_6wvkn-UmLyU-yfv_S5SZGbplxZI0WAAo8iOtuLBg2BjmQB_LMPnJ8yvD0XkAZCyYfjttZW5HII4PTAbHCxSlt9MMTgvLHR6uETvEraZABcTlz9OnGR2cZcuvocsHqP3-a3y27LW15CReT7fVBSThxK9ySno0wdzf7pXntDBerVza4YCi5yJGI1soD3_Xic0AUirweNPWTpVEYn5B1qpjsAxOeXbUTiRPiJNIoiTGWCsjN4r5kiVNdWOTG3dVzREINY.GXgpEWnGg4foibsG85PZp3A7FKRsSYQ7WlYCih9vXx4&dib_tag=se&keywords=ear%2Bplug%2Bconcert&qid=1774931662&sprefix=%2Caps%2C588&sr=8-6&th=1"}
+                  href={selectedColor === 'Purple' ? "https://www.amazon.com/dp/B0H7HKBPR3" : "https://www.amazon.com/dp/B0GYSB8H8P"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`flex-1 rounded-full font-bold py-4 transition-all uppercase tracking-widest text-sm text-center block ${selectedColor === 'Purple' ? 'bg-[#e8b6fa] text-white hover:bg-[#e8b6fa]/90' : 'bg-black text-white hover:bg-black/90'}`}

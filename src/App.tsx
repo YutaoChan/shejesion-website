@@ -154,7 +154,7 @@ const Hero = () => {
   );
 };
 
-const ProductSection = ({ id, title, subtitle = null, description = null, tagline = null, features, image, reverse = false, accentColor = "emerald", supportLink = "", supportText = "", techLink = "", qaLink = "" }) => {
+const ProductSection = ({ id, title, subtitle = null, description = null, tagline = null, features, image, reverse = false, accentColor = "emerald", supportLink = "", supportText = "", techLink = "", qaLink = "", productLink = "" }) => {
   const colorMap = {
     emerald: "text-emerald-600 bg-emerald-50",
     blue: "text-blue-600 bg-blue-50",
@@ -174,15 +174,33 @@ const ProductSection = ({ id, title, subtitle = null, description = null, taglin
             transition={{ duration: 0.8 }}
             className="md:flex-[2] w-full"
           >
-            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl group">
-              <img 
-                src={image} 
-                alt={altText} 
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-            </div>
+            {productLink ? (
+              <a
+                href={productLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View ${altText} on Amazon`}
+                className="relative block aspect-square rounded-3xl overflow-hidden shadow-2xl group cursor-pointer"
+              >
+                <img
+                  src={image}
+                  alt={altText}
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </a>
+            ) : (
+              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl group">
+                <img
+                  src={image}
+                  alt={altText}
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+            )}
           </motion.div>
 
           <motion.div 
@@ -551,7 +569,7 @@ const Footer = () => {
               <h4 className="font-bold mb-6">Support</h4>
               <ul className="space-y-4 text-black/50 text-sm">
                 <li><Link to="/support#support-contact" className="hover:text-black transition-colors">Contact Us</Link></li>
-                <li><Link to="/support" className="hover:text-black transition-colors">FAQ</Link></li>
+                <li><Link to="/support#support-faq" className="hover:text-black transition-colors">FAQ</Link></li>
               </ul>
             </div>
           </div>
@@ -587,6 +605,7 @@ const Home = () => {
         description=""
         accentColor="blue"
         image="/earplugs.jpg"
+        productLink="https://www.amazon.com/dp/B0GYSB8H8P"
         supportLink="/earplugs-support"
         supportText="Watch Usage Video"
         techLink="/earplugs-tech"
@@ -618,6 +637,7 @@ const HearingAids = () => {
         accentColor="emerald"
         reverse={true}
         image="/hearingaids/hearingaids(grey).jpg"
+        productLink="https://www.amazon.com/Moderate-Rechargeable-Amplifiers-Cancelling-Adjustment/dp/B0F9YZQW2P"
         supportLink="/hearing-aids-qa"
         supportText="Q&A"
         techLink="/hearing-aids-tech"
@@ -645,18 +665,14 @@ const Support = () => {
   return (
     <main className="min-h-screen font-sans">
       {/* Hero Section */}
-      <section className="pt-40 pb-24 bg-white text-center px-6">
+      <section id="support-contact" className="pt-32 pb-8 md:pt-40 md:pb-12 bg-white text-center px-6 scroll-mt-24">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6">Support Center</h1>
-          <div className="text-lg md:text-xl text-black/60 max-w-2xl mx-auto space-y-1">
-            <p>Need help? Email <a href="mailto:shejeison@outlook.com" className="text-black font-bold underline">shejeison@outlook.com</a></p>
-            <p className="text-base">We'll respond within 24 hours.</p>
-          </div>
+          <h1 className="text-5xl md:text-7xl font-black tracking-tighter">Support Center</h1>
         </motion.div>
       </section>
 
       {/* Contact Section */}
-      <section id="support-contact" className="py-24 bg-white">
+      <section className="pt-8 pb-20 md:pt-12 md:pb-24 bg-white">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -687,7 +703,7 @@ const Support = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 bg-stone-50">
+      <section id="support-faq" className="py-24 bg-stone-50 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -698,6 +714,10 @@ const Support = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-white p-6 md:p-8 rounded-3xl border border-black/5 shadow-sm">
               <FaqList faqs={supportFaqs} openIndex={openSupportIndex} setOpenIndex={setOpenSupportIndex} />
+            </div>
+            <div className="mt-14 md:mt-16 text-center text-xl md:text-2xl text-black/60 space-y-2">
+              <p>Still need help? Email <a href="mailto:shejeison@outlook.com" className="text-black font-bold underline">shejeison@outlook.com</a></p>
+              <p className="text-lg md:text-xl">We'll respond within 24 hours.</p>
             </div>
           </div>
         </div>
@@ -761,32 +781,15 @@ const HearingAidsQA = () => {
 
 const ScrollManager = () => {
   const { pathname, hash, key } = useLocation();
-  const isInitialLoad = React.useRef(true);
 
   // 1. 禁用浏览器默认的滚动恢复逻辑
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
-    
-    // 如果是初始加载且带有 hash，清除 hash 并回到顶部
-    if (window.location.hash) {
-      window.history.replaceState(null, '', window.location.pathname);
-    }
   }, []);
 
-  // 2. 每次路由变化时，执行我们自己的滚动逻辑
   useEffect(() => {
-    if (isInitialLoad.current) {
-      // 初始加载强制回到顶部
-      window.scrollTo(0, 0);
-      setTimeout(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-        isInitialLoad.current = false;
-      }, 50);
-      return;
-    }
-
     if (hash) {
       // 如果有锚点（比如 #music-earplugs），滚动到对应区块
       const element = document.getElementById(hash.replace('#', ''));
