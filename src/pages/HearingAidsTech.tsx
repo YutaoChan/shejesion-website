@@ -36,7 +36,7 @@ const HearingAidsTech = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           
           {/* Left Column: Product Image */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-32 lg:self-start">
             <div className="relative aspect-square bg-[#F3F3F3] rounded-3xl overflow-hidden flex items-center justify-center p-12">
               <motion.img 
                 key={selectedColor}

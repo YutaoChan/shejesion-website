@@ -30,13 +30,13 @@ const EarplugsTech = () => {
           <ChevronRight size={10} />
           <Link to="/#music-earplugs" className="hover:text-black transition-colors">Earplugs</Link>
           <ChevronRight size={10} />
-          <span className="text-black">Shejeison S1</span>
+          <span className="text-black">S1 Adjustable Earplugs</span>
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           
           {/* Left Column: Product Image */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-32 lg:self-start">
             <div className="relative aspect-square bg-[#F3F3F3] rounded-3xl overflow-hidden flex items-center justify-center p-12">
               <motion.img 
                 key={selectedColor}
@@ -55,8 +55,7 @@ const EarplugsTech = () => {
           {/* Right Column: Product Info */}
           <div className="lg:col-span-5 space-y-8">
             <div>
-              <h1 className="text-5xl font-bold tracking-tight mb-2">Adjustable Earplugs</h1>
-              <p className="text-2xl text-black/60 mb-4">Shejeison S1</p>
+              <h1 className="text-5xl font-bold tracking-tight mb-6">S1 Adjustable Earplugs</h1>
 
               <p className="text-3xl font-bold mb-8">$33.32</p>
               <div className="space-y-4 mb-8">

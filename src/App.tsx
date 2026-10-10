@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 
 import EarplugsTech from './pages/EarplugsTech.tsx';
+import ConcertEarplugsTech from './pages/ConcertEarplugsTech.tsx';
 import EarplugsSupport from './pages/EarplugsSupport.tsx';
 import HearingAidsTech from './pages/HearingAidsTech.tsx';
 
@@ -154,10 +155,11 @@ const Hero = () => {
   );
 };
 
-const ProductSection = ({ id, title, subtitle = null, description = null, tagline = null, features, image, reverse = false, accentColor = "emerald", supportLink = "", supportText = "", techLink = "", qaLink = "", productLink = "" }) => {
+const ProductSection = ({ id, title, subtitle = null, description = null, tagline = null, features, image, reverse = false, accentColor = "emerald", supportLink = "", supportText = "", techLink = "", qaLink = "", productLink = "", showActions = true }) => {
   const colorMap = {
     emerald: "text-emerald-600 bg-emerald-50",
     blue: "text-blue-600 bg-blue-50",
+    gold: "text-amber-500 bg-amber-50",
   };
 
   // Extract text from title if it's a React element
@@ -251,7 +253,7 @@ const ProductSection = ({ id, title, subtitle = null, description = null, taglin
               </div>
             )}
 
-            <div className="flex flex-col md:flex-row flex-wrap items-start md:items-center gap-4">
+            {showActions && <div className="flex flex-col md:flex-row flex-wrap items-start md:items-center gap-4">
               {techLink ? (
                 <Link to={techLink} className="order-2 md:order-1 px-6 py-3 md:px-8 md:py-4 border-2 border-black text-black rounded-full font-bold hover:bg-black hover:text-white transition-all flex items-center gap-2">
                   Learn Detail
@@ -275,7 +277,7 @@ const ProductSection = ({ id, title, subtitle = null, description = null, taglin
                   <ArrowRight size={18} />
                 </Link>
               )}
-            </div>
+            </div>}
           </motion.div>
         </div>
       </div>
@@ -603,7 +605,7 @@ const Home = () => {
         title={<>SHEJEISON S1 <br /> Adjustable Ear Plugs</>}
         tagline="HUSH, ON CALL"
         description=""
-        accentColor="blue"
+        accentColor="gold"
         image="/earplugs.jpg"
         productLink="https://www.amazon.com/dp/B0GYSB8H8P"
         supportLink="/earplugs-support"
@@ -615,6 +617,24 @@ const Home = () => {
           { name: "Clear & High Fidelity Sound", desc: "Filters unwanted noise while preserving crystal-clear, high-fidelity music, delivering safe hearing protection for live performances.", icon: <Check size={18} /> },
           { name: "Customized Comfort", desc: "Includes 4 sizes of soft silicone tips (XS/S/M/L) for a pressure-free, personalized fit that lasts all day.", icon: <Check size={18} /> },
           { name: "Secure Fit", desc: "Ergonomic shaped design stays securely in place during dancing, concerts, and all daily activities.", icon: <Check size={18} /> },
+        ]}
+      />
+
+      <ProductSection
+        id="concert-earplugs"
+        title={<>SHEJEISON S2 <br /> Concert Ear Plugs</>}
+        tagline="FEEL THE MUSIC"
+        description="Made for concerts, festivals, and live events, the S2 Concert Ear Plugs help soften overwhelming sound while preserving the detail and energy of the music."
+        accentColor="blue"
+        image="/s2Detail/blue/amazon-main-square.jpg"
+        productLink="https://www.amazon.com/dp/B0HLFWQQSG?th=1"
+        techLink="/concert-earplugs-tech"
+        qaLink="/concert-earplugs-qa"
+        features={[
+          { name: "Concert-Ready Protection", desc: "Designed for live music, festivals, clubs, and other high-volume environments.", icon: <Check size={18} /> },
+          { name: "High-Fidelity Audio", desc: "Reduces harsh volume while preserving the detail and character of music.", icon: <Check size={18} /> },
+          { name: "Multiple Ear Tip Sizes", desc: "Includes multiple silicone ear tip sizes for a secure, personalized fit.", icon: <Check size={18} /> },
+          { name: "Soft, Comfortable Fit", desc: "Flexible silicone ear tips provide a gentle seal for extended listening sessions.", icon: <Check size={18} /> },
         ]}
       />
 
@@ -753,6 +773,37 @@ const EarplugsQA = () => {
   );
 };
 
+const ConcertEarplugsQA = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const faqs = [
+    { question: "What are the S2 Concert Ear Plugs designed for?", answer: "S2 Concert Ear Plugs are designed for concerts, festivals, clubs, and other live events where you want to reduce overwhelming volume while staying connected to the music." },
+    { question: "Will the S2 Concert Ear Plugs block the music completely?", answer: "No. S2 Concert Ear Plugs are intended to soften harsh volume while preserving the character, detail, and atmosphere of live performances." },
+    { question: "How do I choose the right ear tip size?", answer: "Start with the size that creates a comfortable seal without pressure. If the earplugs feel loose, try a larger tip; if they feel tight, try a smaller one." },
+    { question: "How do I clean the S2 Concert Ear Plugs?", answer: "Remove the silicone tips and wash them with mild soap and warm water. Wipe the earplug body with a soft, dry cloth and let all parts dry completely before reassembly." },
+    { question: "Where can I buy the S2 Concert Ear Plugs?", answer: <a href="https://www.amazon.com/dp/B0HLFWQQSG?th=1" target="_blank" rel="noopener noreferrer" className="font-bold underline">Check S2 Concert Ear Plugs on Amazon</a> },
+  ];
+
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+
+  return (
+    <main className="min-h-screen bg-stone-50 pt-32 pb-24 font-sans">
+      <section className="bg-white pt-16 pb-20 px-6 text-center">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl mx-auto">
+          <p className="text-sm font-bold tracking-[0.25em] uppercase text-emerald-600 mb-4">Shejeison S2 Concert Ear Plugs</p>
+          <h1 className="text-5xl md:text-7xl font-black tracking-tighter">S2 Concert Ear Plugs Questions & Answers</h1>
+        </motion.div>
+      </section>
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="bg-white p-6 md:p-8 rounded-3xl border border-black/5 shadow-sm">
+            <FaqList faqs={faqs} openIndex={openIndex} setOpenIndex={setOpenIndex} />
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+};
+
 const HearingAidsQA = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -821,8 +872,10 @@ export default function App() {
           <Route path="/hearing-aids" element={<HearingAids />} />
           <Route path="/support" element={<Support />} />
           <Route path="/earplugs-tech" element={<EarplugsTech />} />
+          <Route path="/concert-earplugs-tech" element={<ConcertEarplugsTech />} />
           <Route path="/earplugs-support" element={<EarplugsSupport />} />
           <Route path="/earplugs-qa" element={<EarplugsQA />} />
+          <Route path="/concert-earplugs-qa" element={<ConcertEarplugsQA />} />
           <Route path="/hearing-aids-qa" element={<HearingAidsQA />} />
           <Route path="/hearing-aids-tech" element={<HearingAidsTech />} />
         </Routes>
