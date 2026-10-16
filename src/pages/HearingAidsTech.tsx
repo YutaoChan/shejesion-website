@@ -166,6 +166,9 @@ const HearingAidsTech = () => {
                   className="w-full max-w-4xl h-auto rounded-xl shadow-sm"
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  decoding="async"
+                  width={1464}
+                  height={600}
                 />
               ))}
             </div>

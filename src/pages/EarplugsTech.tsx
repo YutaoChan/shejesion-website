@@ -206,6 +206,10 @@ const EarplugsTech = () => {
                   alt={`Product Detail ${idx + 1}`}
                   className="w-full h-auto rounded-[32px] shadow-sm"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
+                  width={1464}
+                  height={600}
                 />
               ))}
             </div>

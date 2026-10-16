@@ -189,6 +189,8 @@ const ProductSection = ({ id, title, subtitle = null, description = null, taglin
                   alt={altText}
                   className={`w-full h-full object-cover object-center ${seamlessImage ? '' : 'transition-transform duration-700 group-hover:scale-105'}`}
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                 />
                 {showImageOverlay && <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />}
               </a>
@@ -199,6 +201,8 @@ const ProductSection = ({ id, title, subtitle = null, description = null, taglin
                   alt={altText}
                   className={`w-full h-full object-cover object-center ${seamlessImage ? '' : 'transition-transform duration-700 group-hover:scale-105'}`}
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                 />
                 {showImageOverlay && <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />}
               </div>
