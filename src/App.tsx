@@ -155,7 +155,7 @@ const Hero = () => {
   );
 };
 
-const ProductSection = ({ id, title, subtitle = null, description = null, tagline = null, features, image, reverse = false, accentColor = "emerald", supportLink = "", supportText = "", techLink = "", qaLink = "", productLink = "", showActions = true }) => {
+const ProductSection = ({ id, title, subtitle = null, description = null, tagline = null, features, image, reverse = false, accentColor = "emerald", supportLink = "", supportText = "", techLink = "", qaLink = "", productLink = "", showActions = true, showImageOverlay = true, seamlessImage = false }) => {
   const colorMap = {
     emerald: "text-emerald-600 bg-emerald-50",
     blue: "text-blue-600 bg-blue-50",
@@ -182,25 +182,25 @@ const ProductSection = ({ id, title, subtitle = null, description = null, taglin
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${altText} on Amazon`}
-                className="relative block aspect-square rounded-3xl overflow-hidden shadow-2xl group cursor-pointer"
+                className={`relative block aspect-square overflow-hidden group cursor-pointer ${seamlessImage ? '' : 'rounded-3xl shadow-2xl'}`}
               >
                 <img
                   src={image}
                   alt={altText}
-                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  className={`w-full h-full object-cover object-center ${seamlessImage ? '' : 'transition-transform duration-700 group-hover:scale-105'}`}
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                {showImageOverlay && <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />}
               </a>
             ) : (
-              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl group">
+              <div className={`relative aspect-square overflow-hidden group ${seamlessImage ? '' : 'rounded-3xl shadow-2xl'}`}>
                 <img
                   src={image}
                   alt={altText}
-                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  className={`w-full h-full object-cover object-center ${seamlessImage ? '' : 'transition-transform duration-700 group-hover:scale-105'}`}
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                {showImageOverlay && <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />}
               </div>
             )}
           </motion.div>
@@ -627,6 +627,8 @@ const Home = () => {
         description="Made for concerts, festivals, and live events, the S2 Concert Ear Plugs help soften overwhelming sound while preserving the detail and energy of the music."
         accentColor="blue"
         image="/s2Detail/blue/amazon-main-square.jpg"
+        showImageOverlay={false}
+        seamlessImage
         productLink="https://www.amazon.com/dp/B0HLFWQQSG?th=1"
         techLink="/concert-earplugs-tech"
         qaLink="/concert-earplugs-qa"
